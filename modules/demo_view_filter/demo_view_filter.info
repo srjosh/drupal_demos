@@ -1,0 +1,7 @@
+name = "Demo Views Filter"
+description = "Provides custom filter for tags."
+package = "Demo"
+core = "7.x"
+
+dependencies[] = "views"
+dependencies[] = "taxonomy"
