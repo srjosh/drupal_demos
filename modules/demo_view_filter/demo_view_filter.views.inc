@@ -17,7 +17,7 @@ function demo_view_filter_views_data_alter(&$data) {
     'title' => t('Tags'),
     'help' => t('Dropdown list of applicable tags, as a filter'), 
     'filter' => array(
-      'handler' => 'demo_view_filter_tag_filter'		// Class name, below
+      'handler' => 'demo_view_filter_tag_filter'    // Class name, below
     ),
   );
 }
@@ -42,25 +42,25 @@ class demo_view_filter_tag_filter extends views_handler_filter_in_operator {
     $this->value_options = $tag_options = array();
 
     if (isset($this->view->args)) {
-      $tid = $this->view->args[0];		//	first argument in view - in this case, the classification id
+      $tid = $this->view->args[0];    //  first argument in view - in this case, the classification id
       if (isset($tid)) {
       
       
-		/*	This section builds a join query between classification and tags, 
-				to get the list of tag ids attached to nodes in the current classification.	*/
+    /*  This section builds a join query between classification and tags, 
+        to get the list of tag ids attached to nodes in the current classification.  */
       
-        $query = db_select('field_data_field_tags', 'ft');	
+        $query = db_select('field_data_field_tags', 'ft');  
         $query->fields('ft', array('field_tags_tid'));
         $query->join('field_data_field_classification', 'fc', 'fc.revision_id = ft.revision_id');
-        $query->condition('fc.field_classification_tid',$tid);
+        $query->condition('fc.field_classification_tid', $tid);
         $query->distinct();
 
         $result = $query->execute();
         $ids = $result->fetchAll();
         
-        //	Loop through list of tag terms, and assign to an options array, which is returned
-        //	for the form element being built by views_handler_filter_in_operator.
-        foreach($ids as $key=>$val) {
+        //  Loop through list of tag terms, and assign to an options array, which is returned
+        //  for the form element being built by views_handler_filter_in_operator.
+        foreach ($ids as $key => $val) {
           $term = taxonomy_term_load($val->field_tags_tid);
           if (isset($term)) {
             $tag_options[$term->tid] = $term->name;
