@@ -1,6 +1,7 @@
 <?php
 /**
  * @file
+ * demo_view_filter.views.inc
  * Views functionality.
  */
 

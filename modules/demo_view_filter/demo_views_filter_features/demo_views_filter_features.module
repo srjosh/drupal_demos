@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Demo Views Filter Features feature.
+ */
+
+include_once 'demo_views_filter_features.features.inc';
